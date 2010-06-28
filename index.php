@@ -134,7 +134,31 @@ if ($me) {
     <img src="https://graph.facebook.com/<?php echo $uid; ?>/picture">
 
 	<?php 
-		echo "<h3>Your friends, in order of most mutual friends.</h3>";
+		// our friends' names
+		$friendnames = $friends['data'];
+		// make an array for all this
+		$matrix = array();	
+		// iterate over all that crap
+		foreach ($friendnames as $crap){
+			// make an entry in the array for them
+			$name = $crap['id']; 
+			$matrix[$name]=array();
+			// now make a string for the call just in case
+			$friendstring = $name . '/friends';
+			// now get their friends
+			$friendsof = $facebook->api($friendstring);
+			// now print it just for the hell of it
+			print_r($friendsof);
+		}
+
+		
+
+
+	
+	
+	
+	
+/*		echo "<h3>Your friends, in order of most mutual friends.</h3>";
 		//get your friends
 		$friendnames = $friends['data'];
 		//we're going to store the results in a matrix aka a 2d array
@@ -166,7 +190,7 @@ if ($me) {
 			$name = $names['name'];
 			print_r("<p><img src='https://graph.facebook.com/$key/picture'> $name : $value mutual friends.</p>");
 		}
-		
+*/		
 	?>	
  
   <?php else: ?>
