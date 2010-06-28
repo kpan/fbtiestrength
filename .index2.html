@@ -1,0 +1,155 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:fb="http://www.wzhu.devrs002.facebook.com/2008/fbml">
+<head>
+  <title>Maybe Tie Strength... maybe not </title>
+  <style type="text/css">
+    .normal_box
+    {
+      width:100px;
+      height:100px;
+      background-color:Blue;
+    }
+
+    .expanded_box
+    {
+      width:100px;
+      height:1000px;
+      background-color:Blue;
+    }
+
+    //Only used for debugging cross domain communciation libary
+    .FB_RECEIVER_DOM
+    {
+        background-color:Blue;
+        width:500px;
+        height:200px;   
+        
+    }
+
+    #FB_HiddenIFrameContainer
+    {
+    }
+  </style>
+</head>
+<body>
+  <h1>do u knowz how close ur frenz r?</h1>
+  <p>we can tell u! using our mathskillz!</p>
+
+  <h2>This is my attempt.</h2>
+  <p>here we're trying to display a list of my friends.</p>
+
+  
+  <h2>Size to content</h2>
+  <p>The most common scenerio is to keep the iframe element sized to the content of the iframe. To do this, simply call FB.CanvasClient.startTimerToSizeToContent(). This demo call FB.CanvasClient.startTimerToSizeToContent() by default. You can click on the "Toggle box size" button to change the size of this iframe and watch how the iframe element size adjust to it.</p>
+  <p>FB.CanvasClient.startTimerToSizeToContent() uses a timer to track the size of content in the iframe. To get/set the timer internal, use FB.CanvasClient.get_timerInterval()/FB.CanvasClient.set_timerInterval(int internal). To stop the timer completely, use FB.CanvasClient.stopTimerToSizeToContent(). </p>
+  <div>
+       <input type="button" onclick="scrollWindow()" value="Scroll To" />
+      <span>x=</span><input type="text" id="scrollToX" />
+      <span>y=</span><input type="text" id="scrollToY" />   
+  </div>
+
+  <br />
+  <input id="toggleButton" onclick="toggleBox()" type="checkbox" />
+  <span>Toggle Box Size</span>
+  
+  <div id="testBox" class="normal_box">
+    Box</div>
+  
+  <h2>Track window resize event</h2>  
+  <p>You can use FB.CanvasClient.add_windowSizeChanged() function to subscribe to the resize event in the hosting browser window. Click on the button below and adjust the size of your browser window and see how it track the changes </p>
+
+  <input onclick="FB.CanvasClient.add_windowSizeChanged(onWindowResized);" value="Track window resize event" type="button" />
+  <div id="CanvasInfo">
+  </div>
+  
+  <h2>Change the Canvas height directly</h2>
+  <p>If you want to change the canvas height directly, you can use FB.CanvasClient.setCanvasHeight(string heightString) directly. The parameter should be valid value for CSS height property.</p>
+  <input onclick="fixHeight();" value="Fix height to 1500pt" type="button" />
+  <h2>File listing</h2>
+
+  <p>This demo application consists of 2 files</p>
+  <ul>
+  <li><a href="index.php">This file</a></li>
+  <li><a href="/demo/xd_receiver.htm">cross domain channel file</a>. See <a href="http://wiki.developers.facebook.com/index.php/Cross_Domain_Communication_Channel" target="_parent">wiki</a> for more information</li>
+  </ul>
+
+    
+    <!--
+    If you want to outputting tracing informaiton to the web page, please uncomment the next HTML markup. If you use Firebug or Safari debug console, these 
+    tracing will go to the JavaScript console as well.
+    -->
+    <textarea style="width: 1000px; height: 300px;" id="_traceTextBox"></textarea>
+  
+    <!--
+    Facebook JavaScript library uses a cross domain communication libary. If you want to debugging that code, you can uncomment the next HTML markup 
+    and set FB.FBDebug.logLevel = 4 at later point. You also should set style for CSS class FB_RECEIVER_DOM (see style code above). These will enable you to
+    see how my cool cross domain communication libary works under the cover :-).
+    -->
+    <div id="FB_HiddenIFrameContainer">FB_HiddenIFrameContainer</div>
+  <script src="http://static.ak.facebook.com/js/api_lib/v0.4/FeatureLoader.js" type="text/javascript">
+  	//<![CDATA[
+  	var api_key = "beaad028a87e078eaa98f0aaed59326a";
+	var channel_path = "fb/xd_receiver.htm";
+	FB_RequireFeatures(["Api"], function(){
+      	FB.FBDebug.isEnabled = true;
+      	FB.FBDebug.logLevel = 4;
+		FB.Facebook.ensureInit(api_key, channel_path);
+		var api = FB.Facebook.apiClient;
+		api.requireLogin(function(exception){
+			FB.FBDebug.logLevel=4;
+			FB.FBDebug.dump("Current user id is " + api.get_session().uid);
+			api.friends_get(null, function(result){
+				FB.FBDebug.dump(result, 'friendsResult from non-batch execution ');
+			});
+		});
+	});
+	//]]>
+    FB_RequireFeatures(["CanvasUtil"], function()
+    {
+      //You can optionally enable extra debugging logging in Facebook JavaScript client
+      FB.FBDebug.isEnabled = true;
+      FB.FBDebug.logLevel = 4;
+      FB.XdComm.Server.init("fb/xd_receiver.htm?v=2");
+      FB.CanvasClient.startTimerToSizeToContent();
+    });
+    function onWindowResized(info)
+    {
+      var canvasInfoDiv = document.getElementById("CanvasInfo");
+      var text = String.format("window ({0}, {1}), page ({2}, {3}), canvas({4}, {5}), scrollPos({6}, {7}), canvasPos({8}, {9})", 
+        info.window.w, info.window.h,info.page.w, info.page.h,
+        info.canvas.w, info.canvas.h,
+        info.scrollPos.x, info.scrollPos.y,
+        info.canvasPos.x, info.canvasPos.y);
+      canvasInfoDiv.innerHTML = text;
+    }
+    function toggleBox()
+    {
+      var button = document.getElementById("toggleButton");
+      var box = document.getElementById("testBox");
+      if(button.checked)
+      {
+        box.className = "expanded_box";
+      }
+      else
+      {
+        box.className = "normal_box";
+      }
+    }
+    function fixHeight()
+    {
+      //We need to call FB.CanvasClient.stopTimerToSizeToContent() first because we have called FB.CanvasClient.startTimerToSizeToContent() earlier
+      FB.CanvasClient.stopTimerToSizeToContent();
+      FB.CanvasClient.setCanvasHeight("1500px");
+    }
+    function scrollWindow()
+    {
+        var x = parseInt(document.getElementById("scrollToX").value);
+        var y = parseInt(document.getElementById("scrollToY").value);
+        FB.CanvasClient.scrollTo(x, y);
+    }
+  </script>
+
+</body>
+</html>
+
