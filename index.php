@@ -129,22 +129,12 @@ $naitik = $facebook->api('/naitik');
       </a>
     </div>
     <?php endif ?>
-
-    <!-- <h3>Session</h3> -->
+<!-- ==================================================================================================================== -->
     <?php if ($me): ?>
-    <pre><?php //print_r($session); ?></pre>
 
     <h3>You</h3>
     <img src="https://graph.facebook.com/<?php echo $uid; ?>/picture">
-    <?php //echo $me['name']; ?>
-<!--
-    <p>your news feed?</p>
-    <pre><?php //print_r($newsfeed); ?></pre>
 
-    <h3>Your User Object</h3>
-    <pre><?php print_r($me); ?></pre>
-    
--->
 	<?php 
 		echo "<h3>Your friends, in order of most mutual friends.</h3>";
 		//get your friends
@@ -180,20 +170,7 @@ $naitik = $facebook->api('/naitik');
 		}
 		
 	?>	
-	
-	
-<!--
-    <h3>Some more stuff that I can pull out of the graph api, yay!</h3>
-    <h5>your wall?</h5>
-    <pre><?php //print_r($wall); ?></pre>
-    <hr />
-    <h5>your statuses?</h5>
-    <pre><?php //print_r($statuses); ?></pre>
-    <hr />
-    <h5>your inbox?</h5>
-    <pre><?php //print_r($inbox); ?></pre>
--->
-  
+ 
   <?php else: ?>
   <p><strong><em>You are not Connected.</em></strong></p>
   <p>Please sign in above.</p>
