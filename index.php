@@ -132,7 +132,6 @@ if ($me) {
 
     <h3>You</h3>
     <img src="https://graph.facebook.com/<?php echo $uid; ?>/picture">
-    <p>i don't know how to debug better.</p>
 
 	<?php 
 		// our friends' names
