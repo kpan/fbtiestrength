@@ -510,8 +510,8 @@ class Facebook
 //////////////////////////////
 // DEBUGGING /////////////////
 echo $result;
-if ($result){
-	echo "<p><p><p></p></p></p>";
+if ($result===false){
+	echo "\n\n why is $result false?\n\n";
 }
 //////////////////////////////
     if ($result === false) {
