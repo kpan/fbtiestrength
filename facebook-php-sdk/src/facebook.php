@@ -420,7 +420,6 @@ class Facebook
       $this->getApiUrl($params['method']),
       $params
     ), true);
-
     // results are returned, errors are thrown
     if (is_array($result) && isset($result['error_code'])) {
       throw new FacebookApiException($result);
