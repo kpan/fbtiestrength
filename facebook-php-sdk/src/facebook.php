@@ -510,7 +510,9 @@ class Facebook
 //////////////////////////////
 // DEBUGGING /////////////////
 echo $result;
-echo bool($result);
+if ($result){
+	echo "<p><p><p></p></p></p>";
+}
 //////////////////////////////
     if ($result === false) {
       $e = new FacebookApiException(array(
