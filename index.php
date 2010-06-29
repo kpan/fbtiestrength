@@ -1,6 +1,6 @@
 <?php
 
-require './facebook-php-sdk/src/facebook.php5';
+require './facebook-php-sdk/src/facebook.php';
 
 // Create our Application instance.
 $facebook = new Facebook(array(
@@ -110,7 +110,7 @@ if ($me) {
     </script>
 
 
-    <h1><a href="index.php5">Constructing Tie Strength on Facebook</a></h1>
+    <h1><a href="index.php">Constructing Tie Strength on Facebook</a></h1>
 
     <?php if ($me): ?>
     <a href="<?php echo $logoutUrl; ?>">
