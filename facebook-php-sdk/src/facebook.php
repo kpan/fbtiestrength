@@ -517,13 +517,13 @@ if ($result==false){
 }
 //////////////////////////////
     if ($result === false) {
-      $e = new FacebookApiException(array(
-        'error_code' => curl_errno($ch),
-        'error'      => array(
-          'message' => curl_error($ch),
-          'type'    => 'CurlException',
-        ),
-      ));
+      //$e = new FacebookApiException(array(
+        //'error_code' => curl_errno($ch),
+        //'error'      => array(
+        //  'message' => curl_error($ch),
+        //  'type'    => 'CurlException',
+        //),
+      //));
       curl_close($ch);
       throw $e;
     }
