@@ -159,12 +159,12 @@ if ($me) {
 		echo "<h3>Your friends, in order of most mutual friends.</h3>";
 		foreach ($sizes as $key => $value) {
 			// get their real name
-			$names = $facebook->api("/$key");
-			$name = $names['name'];
+			//$names = $facebook->api("/$key");
+			//$name = $names['name'];
 			// and their friends
-			$friends = $matrix[$key];
+			//$friends = $matrix[$key];
 			// print their photo and name in bold
-			print_r("<p><img src='https://graph.facebook.com/$key/picture'> <b>$name :</b> $value mutual friends.<br/>");
+			//print_r("<p><img src='https://graph.facebook.com/$key/picture'> <b>$name :</b> $value mutual friends.<br/>");
 			// print all of the mutual friends' names
 			//foreach ($friends as $uid){
 			//	$fnames = $facebook->api("/$uid");
