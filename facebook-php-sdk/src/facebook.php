@@ -515,15 +515,15 @@ class Facebook
     	echo "url $url <br />";
     	echo "params $params <br />";
     	echo "ch $ch <br />";
-      //$e = new FacebookApiException(array(
-        //'error_code' => curl_errno($ch),
-        //'error'      => array(
-        //  'message' => curl_error($ch),
-        //  'type'    => 'CurlException',
-        //),
-      //));
+      $e = new FacebookApiException(array(
+        'error_code' => curl_errno($ch),
+        'error'      => array(
+          'message' => curl_error($ch),
+          'type'    => 'CurlException',
+        ),
+      ));
       curl_close($ch);
-      //throw $e;
+      throw $e;
     }
     curl_close($ch);
         	echo "url $url <br />";
