@@ -524,7 +524,7 @@ if ($result==false){
         //  'type'    => 'CurlException',
         //),
       //));
-      //curl_close($ch);
+      curl_close($ch);
       //throw $e;
     }
     curl_close($ch);
