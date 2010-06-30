@@ -166,48 +166,13 @@ if ($me) {
 			// print their photo and name in bold
 			print_r("<p><img src='https://graph.facebook.com/$key/picture'> <b>$name :</b> $value mutual friends.<br/>");
 			// print all of the mutual friends' names
-			foreach ($friends as $uid){
-				$fnames = $facebook->api("/$uid");
-				$fname = $fnames['name'];
-				echo "$fname, ";
-			}
+			//foreach ($friends as $uid){
+			//	$fnames = $facebook->api("/$uid");
+			//	$fname = $fnames['name'];
+			//	echo "$fname, ";
+			//}
 			echo "\n";
-		}
-		
-
-
-	
-	
-	
-	
-/*		
-		//get your friends
-		$friendnames = $friends['data'];
-		//we're going to store the results in a matrix aka a 2d array
-		$matrix = array();
-		$sums = array();
-		//keys are uids, values are arrays / friendbool
-		foreach($friendnames as $xcoord) {
-			//get the user id and throw it in the matrix
-			$friend1 = $xcoord['id'];
-			$matrix[$friend1] = array();
-			$friends1 = $matrix[$friend1];
-			foreach($friendnames as $ycoord){
-				$friend2 = $ycoord['id'];
-				
-				
-				$friendbool = $mutuals[0][are_friends];
-				$matrix[$friend1][friend2]=$friendbool;
-				$sums[$friend1] += $friendbool;
-			}
-		}
-		//reverse sort so most friends at the top
-		arsort($sums);
-		foreach($sums as $key => $value){
-			
-			;
-		}
-*/		
+		}	
 	?>	
  
   <?php else: ?>
