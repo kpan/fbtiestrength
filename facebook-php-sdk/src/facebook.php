@@ -509,14 +509,12 @@ class Facebook
     $result = curl_exec($ch);
 //////////////////////////////
 // DEBUGGING /////////////////
-echo "\n\n\n\n\nW T F\n\n\n";
-echo $result;
-echo "\n\n\n\n\nW T F\n\n\n";
-if ($result==false){
-	echo "\n\n why is $result false?\n\n";
-}
 //////////////////////////////
     if ($result === false) {
+    	//what made it false this time?
+    	echo "url $url <br />";
+    	echo "params $params <br />";
+    	echo "ch $ch <br />";
       //$e = new FacebookApiException(array(
         //'error_code' => curl_errno($ch),
         //'error'      => array(
@@ -528,6 +526,9 @@ if ($result==false){
       //throw $e;
     }
     curl_close($ch);
+        	echo "url $url <br />";
+    	echo "params $params <br />";
+    	echo "ch $ch <br />";
     return $result;
   }
 
